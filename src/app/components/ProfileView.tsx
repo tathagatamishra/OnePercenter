@@ -40,6 +40,16 @@ export function ProfileView({ profile, onUpdate, onLogout }: ProfileViewProps) {
     return emojis[personality] || '⭐';
   };
 
+    const getRank = (aura: number) => {
+    if (aura >= 5000) return { label: 'Omega', emoji: '🧠', gradient: 'from-[#F59E0B] via-[#EF4444] to-[#8B5CF6]' };
+    if (aura >= 1500) return { label: 'Sigma', emoji: '🗿', gradient: 'from-[#8B5CF6] to-[#06B6D4]' };
+    if (aura >= 500) return { label: 'Gamma', emoji: '🎯', gradient: 'from-[#06B6D4] to-[#22C55E]' };
+    if (aura >= 100) return { label: 'Beta', emoji: '🤝', gradient: 'from-[#22C55E] to-[#F59E0B]' };
+    return { label: 'NPC', emoji: '😶', gradient: 'from-[#9CA3AF] to-[#6B7280]' };
+  };
+
+  const rank = getRank(profile.aura);
+
   return (
     <div className="px-6 py-4 space-y-4">
       <div className="flex items-center justify-between mb-4">
@@ -55,7 +65,25 @@ export function ProfileView({ profile, onUpdate, onLogout }: ProfileViewProps) {
       </div>
 
       {/* Profile header */}
-      <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center">
+      <div className="bg-[#151519] border border-[#24242B] rounded-2xl p-6 text-center">
+        <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-5xl mb-4 shadow-lg shadow-[#8B5CF6]/30">
+          {rank.emoji}
+        </div>
+        <h3 className="text-2xl font-bold text-[#F5F5F7] mb-2">{profile.name}</h3>
+        <p className="text-[#9CA3AF] text-sm mb-3">{profile.email}</p>
+        <div className={`inline-block bg-gradient-to-r ${rank.gradient} px-5 py-2 rounded-full`}>
+          <span className="text-white font-bold text-sm uppercase tracking-wide">{rank.label}</span>
+        </div>
+        <p className="text-xs text-[#9CA3AF] mt-3">
+          {rank.label === 'NPC' && 'Start grinding to level up'}
+          {rank.label === 'Beta' && 'Building momentum'}
+          {rank.label === 'Gamma' && 'On the grind'}
+          {rank.label === 'Sigma' && 'Elite status unlocked'}
+          {rank.label === 'Omega' && 'Absolute legend'}
+        </p>
+      </div>
+
+      {/* <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center">
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-4xl mb-3">
           {getPersonalityEmoji(profile.personality)}
         </div>
@@ -64,7 +92,7 @@ export function ProfileView({ profile, onUpdate, onLogout }: ProfileViewProps) {
         <div className="inline-block bg-white/20 px-4 py-1.5 rounded-full">
           <span className="text-white font-semibold">{profile.personality} Personality</span>
         </div>
-      </div>
+      </div> */}
 
       {/* Profile details */}
       <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 space-y-3">
