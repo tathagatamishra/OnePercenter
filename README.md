@@ -1,2 +1,11 @@
-# OnePercenter
-Improve 1% Every Day. Farm aura and mog everyone
+
+  # Design OnePercenter Mobile App
+
+  This is a code bundle for Design OnePercenter Mobile App. The original project is available at https://www.figma.com/design/tG221C7LLuYDvtcJdpLx3d/Design-OnePercenter-Mobile-App.
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  
