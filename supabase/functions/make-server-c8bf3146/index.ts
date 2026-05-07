@@ -129,7 +129,14 @@ app.put("/make-server-c8bf3146/user/profile", async (c) => {
     }
 
     const updates = await c.req.json();
-    const currentProfile = await kv.get(`user:${user.id}`);
+    const currentProfile = await kv.get(`user:${user.id}`) || {
+      id: user.id,
+      email: user.email,
+      name: user.user_metadata?.name || '',
+      aura: 100,
+      personality: 'Beta',
+      createdAt: new Date().toISOString(),
+    };
     const updatedProfile = { ...currentProfile, ...updates };
 
     await kv.set(`user:${user.id}`, updatedProfile);
